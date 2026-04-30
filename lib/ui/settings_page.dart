@@ -64,7 +64,7 @@ class _SettingsPageState extends State<SettingsPage> {
           children: [
             const Text(
               'Slskd Configuration',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.deepPurple),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFFC8202E)),
             ),
             const SizedBox(height: 16),
             TextField(

@@ -92,7 +92,7 @@ class _AlbumDetailsPageState extends State<AlbumDetailsPage> {
                       final badgeColor = r.format == 'FLAC'
                           ? Colors.teal
                           : r.format == 'MP3 320kbps'
-                              ? Colors.deepPurple
+                              ? const Color(0xFFC8202E)
                               : r.format.startsWith('MP3')
                                   ? Colors.blueGrey
                                   : Colors.grey;
@@ -242,7 +242,7 @@ class _AlbumDetailsPageState extends State<AlbumDetailsPage> {
         children: [
           // Album Header
           Container(
-            color: Colors.deepPurple.shade50,
+            color: const Color(0x33C8202E),
             padding: const EdgeInsets.all(24.0),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -272,7 +272,7 @@ class _AlbumDetailsPageState extends State<AlbumDetailsPage> {
                       const SizedBox(height: 8),
                       Text(
                         widget.album.artistName,
-                        style: const TextStyle(fontSize: 16, color: Colors.deepPurple),
+                        style: const TextStyle(fontSize: 16, color: const Color(0xFFC8202E)),
                       ),
                       const SizedBox(height: 8),
                       Text(
@@ -314,8 +314,8 @@ class _AlbumDetailsPageState extends State<AlbumDetailsPage> {
                     final track = state.selectedAlbumTracks[index];
                     return ListTile(
                       leading: CircleAvatar(
-                        backgroundColor: Colors.deepPurple.shade100,
-                        child: Text('${index + 1}', style: const TextStyle(color: Colors.deepPurple)),
+                        backgroundColor: const Color(0x66C8202E),
+                        child: Text('${index + 1}', style: const TextStyle(color: const Color(0xFFC8202E))),
                       ),
                       title: Text(track.trackName),
                       subtitle: Text(track.artistName),

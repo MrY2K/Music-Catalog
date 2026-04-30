@@ -10,16 +10,13 @@ class SettingsState extends ChangeNotifier {
   String get username => _username;
   String get password => _password;
 
-  SettingsState() {
-    _loadSettings();
-  }
+  SettingsState();
 
-  Future<void> _loadSettings() async {
+  Future<void> loadSettings() async {
     final prefs = await SharedPreferences.getInstance();
     _slskdUrl = prefs.getString('slskdUrl') ?? 'http://YOUR_SLSKD_HOST:5030';
     _username = prefs.getString('slskdUsername') ?? '';
     _password = prefs.getString('slskdPassword') ?? '';
-    notifyListeners();
   }
 
   Future<void> saveSettings(String url, String user, String pass) async {

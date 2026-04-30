@@ -200,7 +200,7 @@ class _HomePageState extends State<HomePage> {
                                               const SizedBox(height: 4),
                                               Text(
                                                 album.isSingle ? 'Single' : 'Album',
-                                                style: const TextStyle(fontSize: 10, color: Colors.deepPurple, fontWeight: FontWeight.w600),
+                                                style: const TextStyle(fontSize: 10, color: Color(0xFFC8202E), fontWeight: FontWeight.w600),
                                               ),
                                             ],
                                           ),

@@ -12,10 +12,14 @@ import 'ui/home_page.dart';
 /// otherwise async calls made during initialization will fail silently.
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  
+  final settingsState = SettingsState();
+  await settingsState.loadSettings();
+
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => SettingsState()),
+        ChangeNotifierProvider.value(value: settingsState),
         ChangeNotifierProvider(create: (context) => CatalogState()),
         ChangeNotifierProvider(create: (context) => DownloadState()),
       ],
@@ -34,12 +38,15 @@ class MusicCatalogApp extends StatelessWidget {
       title: 'Music Catalog',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
-        primaryColor: Colors.deepPurpleAccent,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFFC8202E),
+          primary: const Color(0xFFC8202E),
+        ),
+        primaryColor: const Color(0xFFC8202E),
         visualDensity: VisualDensity.adaptivePlatformDensity,
         scaffoldBackgroundColor: Colors.grey[50],
         appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.deepPurple,
+          backgroundColor: Color(0xFFC8202E),
           foregroundColor: Colors.white,
           centerTitle: true,
         ),

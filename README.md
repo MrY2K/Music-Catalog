@@ -1,6 +1,22 @@
+<div align="center">
+  <img src="assets/logo.png" width="150" alt="Logo">
+</div>
+
 # 🎵 Music Catalog
 
 A Flutter mobile app for browsing your music library and downloading albums directly to your [slskd](https://github.com/slskd/slskd) server via the Soulseek network.
+
+---
+
+## Screenshots
+
+<div align="center">
+  <img src="assets/1.jpg" width="150" alt="Screenshot 1">
+  <img src="assets/2.jpg" width="150" alt="Screenshot 2">
+  <img src="assets/3.jpg" width="150" alt="Screenshot 3">
+  <img src="assets/4.jpg" width="150" alt="Screenshot 4">
+  <img src="assets/5.jpg" width="150" alt="Screenshot 5">
+</div>
 
 ---
 
