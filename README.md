@@ -4,7 +4,7 @@
 
 # 🎵 Music Catalog
 
-A Flutter mobile app for browsing your music library and downloading albums directly to your [slskd](https://github.com/slskd/slskd) server via the Soulseek network.
+A Flutter mobile app downloading albums directly to your [slskd](https://github.com/slskd/slskd) server via the Soulseek network.
 
 ---
 
