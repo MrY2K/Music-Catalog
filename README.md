@@ -111,7 +111,7 @@ slskd queues & downloads the files 🎉
 
 ```bash
 # Clone
-git clone https://github.com/YOUR_USERNAME/music-catalog.git
+git clone https://github.com/MrY2K/Music-Catalog.git
 cd music-catalog
 
 # Install dependencies
