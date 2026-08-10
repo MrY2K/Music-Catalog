@@ -354,6 +354,7 @@ class _HomePageState extends State<HomePage> {
                     icon: const Icon(Icons.download, color: Colors.blue),
                     onPressed: () async {
                       await downloadState.downloadFile(result.username, file);
+                      if (!context.mounted) return;
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text('Downloading: $filename')),
                       );
