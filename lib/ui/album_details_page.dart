@@ -29,7 +29,7 @@ class _AlbumDetailsPageState extends State<AlbumDetailsPage> {
     final downloadState = Provider.of<DownloadState>(context, listen: false);
     final settings = Provider.of<SettingsState>(context, listen: false);
 
-    downloadState.initiateDownload(
+    downloadState.downloadAlbum(
       album,
       settings.slskdUrl,
       settings.username,
