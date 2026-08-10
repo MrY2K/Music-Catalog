@@ -13,6 +13,7 @@ class _SettingsPageState extends State<SettingsPage> {
   late TextEditingController _urlController;
   late TextEditingController _userController;
   late TextEditingController _passController;
+  String _selectedSearchEngine = 'iTunes';
 
   @override
   void initState() {
@@ -21,6 +22,7 @@ class _SettingsPageState extends State<SettingsPage> {
     _urlController = TextEditingController(text: settings.slskdUrl);
     _userController = TextEditingController(text: settings.username);
     _passController = TextEditingController(text: settings.password);
+    _selectedSearchEngine = settings.searchEngine;
   }
 
   @override
@@ -37,6 +39,7 @@ class _SettingsPageState extends State<SettingsPage> {
       _urlController.text.trim(),
       _userController.text.trim(),
       _passController.text,
+      _selectedSearchEngine,
     );
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Settings saved successfully!')),
@@ -44,7 +47,7 @@ class _SettingsPageState extends State<SettingsPage> {
     Navigator.of(context).pop();
   }
 
-  @override
+@override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -64,7 +67,11 @@ class _SettingsPageState extends State<SettingsPage> {
           children: [
             const Text(
               'Slskd Configuration',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFFC8202E)),
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFFC8202E),
+              ),
             ),
             const SizedBox(height: 16),
             TextField(
@@ -102,6 +109,30 @@ class _SettingsPageState extends State<SettingsPage> {
             const Text(
               'If you are locked out, you can run "./slskd --reset-password" on your server, or edit the "slskd.yml" configuration file to reset your credentials to the defaults.',
               style: TextStyle(color: Colors.grey),
+            ),
+
+            const SizedBox(height: 24),
+            const Divider(),
+            const SizedBox(height: 16),
+            const Text(
+              'Search Engine',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            ),
+            const SizedBox(height: 8),
+            DropdownButton<String>(
+              value: _selectedSearchEngine,
+              isExpanded: true,
+              items: const [
+                DropdownMenuItem(value: 'iTunes', child: Text('iTunes')),
+                DropdownMenuItem(value: 'slskd', child: Text('slskd')),
+              ],
+              onChanged: (String? newValue) {
+                if (newValue != null) {
+                  setState(() {
+                    _selectedSearchEngine = newValue;
+                  });
+                }
+              },
             ),
           ],
         ),
