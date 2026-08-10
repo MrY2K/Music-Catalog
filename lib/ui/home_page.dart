@@ -285,7 +285,7 @@ class _HomePageState extends State<HomePage> {
               margin: const EdgeInsets.only(bottom: 12),
               child: ListTile(
                 leading: CircleAvatar(
-                  child: Text(result.format.substring(0, 1)),
+                  child: Text(result.username.substring(0, 1)),
                 ),
                 title: Text(result.directory),
                 subtitle: Column(
