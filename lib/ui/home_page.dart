@@ -24,6 +24,11 @@ class _HomePageState extends State<HomePage> {
     super.dispose();
   }
 
+  String _baseName(String fullPath) {
+    final parts = fullPath.split(RegExp(r'[/\\]'));
+    return parts.isNotEmpty ? parts.last : fullPath;
+  }
+
   /// Triggered when the user presses the search button or submits from the keyboard
   void _performSearch() {
     final query = _searchController.text.trim();
@@ -328,7 +333,8 @@ class _HomePageState extends State<HomePage> {
               itemCount: result.files.length,
               itemBuilder: (context, index) {
                 final file = result.files[index];
-                final filename = file['filename']?.toString() ?? 'Unknown file';
+                final fullPath = file['filename']?.toString() ?? 'Unknown file';
+                final filename = _baseName(fullPath);
                 final size = file['size'] as int? ?? 0;
                 final sizeLabel = size > 0
                     ? '${(size / 1024 / 1024).toStringAsFixed(1)} MB'
