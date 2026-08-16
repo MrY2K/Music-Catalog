@@ -69,7 +69,7 @@ class DownloadState extends ChangeNotifier {
 
   /// Kicks off the full download flow for [album].
   /// Credentials come from the Settings page.
-  Future<void> initiateDownload(
+  Future<void> downloadAlbum(
     Album album,
     String baseUrl,
     String username,
@@ -132,6 +132,81 @@ class DownloadState extends ChangeNotifier {
           timer.cancel();
           _status = DownloadStatus.error;
           _errorMessage = 'Error while polling: $e';
+          notifyListeners();
+        }
+      });
+    } catch (e) {
+      _status = DownloadStatus.error;
+      _errorMessage = e.toString();
+      notifyListeners();
+    }
+  }
+
+  Future<void> downloadFile(String username, Map<String, dynamic> file) async {
+    if (_api == null) return;
+    _status = DownloadStatus.downloading;
+    notifyListeners();
+    try {
+      await _api!.downloadFiles(username, [file]);
+      _status = DownloadStatus.complete;
+      notifyListeners();
+    } catch (e) {
+      _status = DownloadStatus.error;
+      _errorMessage = 'Download failed: $e';
+      notifyListeners();
+    }
+  }
+
+  Future<void> searchSlskd(
+    String query,
+    String baseUrl,
+    String username,
+    String password,
+  ) async {
+    // Create or update the API instance with the current settings
+    _api = SlskdApi(baseUrl: baseUrl, username: username, password: password);
+
+    _status = DownloadStatus.searching;
+    _errorMessage = '';
+    _results = [];
+    notifyListeners();
+
+    try {
+      final searchId = await _api!.startSearch(query);
+
+      int attempts = 0;
+      _pollTimer = Timer.periodic(const Duration(seconds: 3), (timer) async {
+        attempts++;
+        if (attempts > 20) {
+          timer.cancel();
+          if (_results.isNotEmpty) {
+            _status = DownloadStatus.results;
+          } else {
+            _status = DownloadStatus.error;
+            _errorMessage = 'Search timed out. No results found.';
+          }
+          notifyListeners();
+          return;
+        }
+
+        try {
+          final state = await _api!.getSearchState(searchId);
+          if (state != 'InProgress') {
+            timer.cancel();
+            final responses = await _api!.getSearchResponses(searchId);
+            _results = _parseResults(responses);
+            if (_results.isNotEmpty) {
+              _status = DownloadStatus.results;
+            } else {
+              _status = DownloadStatus.error;
+              _errorMessage = 'No audio files found for "$query".';
+            }
+            notifyListeners();
+          }
+        } catch (e) {
+          timer.cancel();
+          _status = DownloadStatus.error;
+          _errorMessage = 'Polling error: $e';
           notifyListeners();
         }
       });

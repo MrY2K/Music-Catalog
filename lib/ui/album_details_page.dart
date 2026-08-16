@@ -29,7 +29,7 @@ class _AlbumDetailsPageState extends State<AlbumDetailsPage> {
     final downloadState = Provider.of<DownloadState>(context, listen: false);
     final settings = Provider.of<SettingsState>(context, listen: false);
 
-    downloadState.initiateDownload(
+    downloadState.downloadAlbum(
       album,
       settings.slskdUrl,
       settings.username,
@@ -272,7 +272,7 @@ class _AlbumDetailsPageState extends State<AlbumDetailsPage> {
                       const SizedBox(height: 8),
                       Text(
                         widget.album.artistName,
-                        style: const TextStyle(fontSize: 16, color: const Color(0xFFC8202E)),
+                        style: const TextStyle(fontSize: 16, color: Color(0xFFC8202E)),
                       ),
                       const SizedBox(height: 8),
                       Text(
@@ -315,7 +315,7 @@ class _AlbumDetailsPageState extends State<AlbumDetailsPage> {
                     return ListTile(
                       leading: CircleAvatar(
                         backgroundColor: const Color(0x66C8202E),
-                        child: Text('${index + 1}', style: const TextStyle(color: const Color(0xFFC8202E))),
+                        child: Text('${index + 1}', style: const TextStyle(color: Color(0xFFC8202E))),
                       ),
                       title: Text(track.trackName),
                       subtitle: Text(track.artistName),
